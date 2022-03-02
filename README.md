@@ -46,12 +46,15 @@ En su navegador ingrese a la siguiente dirección para visualizar:
 3. Opciones POJO
 
    http://localhost:4567/opciones/index
+
    ![](img/ind.png)
 
    http://localhost:4567/opciones/lottery
+
    ![](img/loteria.png)
 
    http://localhost:4567/opciones/song
+4. 
    ![](img/song.png)
 
 
