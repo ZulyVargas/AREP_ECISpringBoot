@@ -35,17 +35,24 @@ En su navegador ingrese a la siguiente dirección para visualizar:
     
     http://localhost:4567/hello.png
 
+   ![](img/imagen.png)
+
 2. Visualizar un archivo html
 
    http://localhost:4567/index.html
 
+   ![](img/index.png)
+
 3. Opciones POJO
 
    http://localhost:4567/opciones/index
+   ![](img/ind.png)
 
    http://localhost:4567/opciones/lottery
+   ![](img/loteria.png)
 
    http://localhost:4567/opciones/song
+   ![](img/song.png)
 
 
 ## Ejecución de  pruebas
@@ -55,6 +62,10 @@ En su navegador ingrese a la siguiente dirección para visualizar:
 ## Despliegue
 
 [![ProjectDesign](https://www.herokucdn.com/deploy/button.png)](https://ecispringserver.herokuapp.com/index.html)
+
+En la página que se le mostrará puede acceder a las diferentes opcines de manera remota sin necesidad de descargar el proyecto.
+
+![](img/heroku.png)
 
 ## Documentación
 Para generar la documentación se debe ejecutar:
