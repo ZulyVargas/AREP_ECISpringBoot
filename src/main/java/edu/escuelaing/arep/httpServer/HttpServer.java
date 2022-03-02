@@ -8,6 +8,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -90,40 +91,20 @@ public class HttpServer {
                 new InputStreamReader(
                         clientSocket.getInputStream()));
         String inputLine, outputLine;
-        Map<String, String> solicitudes = new HashMap<>();
+        //Map<String, String> solicitudes = new HashMap<>();
 
         //String file ="";
         boolean requestReady = false;
+        ArrayList<String> request = new ArrayList<>();
         while ((inputLine = in.readLine()) != null) {
             System.out.println("Received: " + inputLine); //Mensaje de lo que recibió
-
-            if (!requestReady) {
-                solicitudes.put("solicitud", inputLine);
-                requestReady = true;
-                System.out.println("Requessssst : " + requestReady);
-            } else {
-                String[] nuevasEntradas = generarEntrada(inputLine);
-                if (nuevasEntradas.length > 1) {
-                    solicitudes.put(nuevasEntradas[0], nuevasEntradas[1]);
-                }
-            }
+            request.add(inputLine);
             if (!in.ready()) {
                 break;
             }
         }
-
-            if (solicitudes.get("solicitud") != null) {
-                Request req = new Request(solicitudes.get("solicitud"));
-
-                System.out.println("RequestLine: " + req);
-                if (req != null) {
-                    //Crear respuesta
-                    makeResponse(req, new PrintWriter(clientSocket.getOutputStream(), true), clientSocket.getOutputStream());
-                }
-                in.close();
-            }
-
-
+        makeResponse(request, new PrintWriter(clientSocket.getOutputStream(), true), clientSocket.getOutputStream());
+        in.close();
     }
 
     //App servicio
@@ -138,7 +119,6 @@ public class HttpServer {
    private static void invokeService(String uriApp, PrintWriter out) throws IllegalAccessException,InvocationTargetException {
         String response = ECISpringBoot.getInstance().invokeService(uriApp);
         out.println(headerOk + response);
-
     }
 
     /**
@@ -147,15 +127,17 @@ public class HttpServer {
      * @param out - Out text.
      * @param outputStream - Out bytes.
      */
-    private void makeResponse(Request req, PrintWriter out, OutputStream outputStream) throws InvocationTargetException, IllegalAccessException {
-        URI uri = req.getTheuri();
-        if (uri.getPath().startsWith("/opciones")) {
-            String appUri= uri.getPath().substring(9);
+    private void makeResponse(ArrayList<String> req, PrintWriter out, OutputStream outputStream) throws InvocationTargetException, IllegalAccessException {
+        String file = req.get(0).split(" ")[1];
+        //URI uri = file.getTheuri();
+        String appUri= file.replace("/opciones/", "");
+        if (file.startsWith("/opciones")) {
             invokeService(appUri,out);
         } else {
-            getFile(uri.getPath(), out, outputStream);
+            getFile(appUri, out, outputStream);
         }
         out.close();
+
     }
 
     /**
