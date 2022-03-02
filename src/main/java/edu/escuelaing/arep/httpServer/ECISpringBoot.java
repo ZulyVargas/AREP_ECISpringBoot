@@ -42,7 +42,9 @@ public class ECISpringBoot {
                     ex.printStackTrace();
                     System.out.printf("Something  failed: ", m, ex.getCause());
                     failed++;
-                }}}
+                }}
+
+        }
     }
 
 
