@@ -1,8 +1,7 @@
 package edu.escuelaing.arep.controlador;
-import edu.escuelaing.arep.anotaciones.Component;
 import edu.escuelaing.arep.anotaciones.RequestMapping;
 
-@Component
+
 public class HelloController {
 
     @RequestMapping(value = "/index")
