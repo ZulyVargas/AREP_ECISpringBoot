@@ -65,7 +65,7 @@ Esta quedará en la carpeta target/site/apidocs.
 
 O diríjase a la siguiente dirección: 
 
-* [Documentación](https://github.com/ZulyVargas)
+* [Documentación](https://github.com/ZulyVargas/AREP_ECISpringBoot/tree/master/javadoc)
 
 ## Construido con 
 
